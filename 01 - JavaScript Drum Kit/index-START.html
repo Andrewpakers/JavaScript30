@@ -59,7 +59,21 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-
+  function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }  
+  const keys = document.querySelectorAll('.key');
+  keys.forEach((button) => {
+    button.addEventListener('click',() => {
+      const dataKey = button.getAttribute('data-key');
+      const sound = document.querySelector('audio[data-key="'+ dataKey + '"]');
+      button.classList.toggle('playing');
+      delay(200).then(() => {
+        button.classList.toggle('playing');
+      });
+      sound.play();
+    });
+  });
 </script>
 
 
